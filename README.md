@@ -2,17 +2,18 @@
 
 # React to-do-list
 
+In this exercise, I am going to consolidate Our knowledge about React, components, props, state, and hooks, by following a tutorial.
+
 ## Major Technologies
 
 HTML5/CSS
 JAVASCRIPT(ES6)
-REST API
-NPM
+REACT
 
 
 ### Install & Setup
 
-In this exercise, I am going to consolidate your knowledge about React, components, props, state, and hooks, by following a tutorial.
+
 
 - Clone this project by the command:
 
