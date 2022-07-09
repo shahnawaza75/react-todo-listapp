@@ -1,57 +1,61 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { IoSend } from 'react-icons/io5';
+import { IconContext } from 'react-icons';
 import PropTypes from 'prop-types';
 
-class InputTodo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-    };
-  }
+const InputTodo = (props) => {
+  const { addTodoProps } = props;
+  const [inputText, setInputText] = useState({
+    title: '',
+  });
 
-  onChange = (e) => {
-    this.setState({
-      title: e.target.value,
+  const onChange = (e) => {
+    setInputText({
+      ...inputText,
+      [e.target.name]: e.target.value,
     });
-  }
+  };
 
-  // onsubmit of the form and validation(check for white space)
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { title } = this.state;
-    const { addTodoProps } = this.props;
-
-    if (title.trim()) {
-      addTodoProps(title);
-      this.setState({
+    if (inputText.title.trim()) {
+      addTodoProps(inputText.title);
+      setInputText({
         title: '',
       });
+    } else {
+      alert('Please write item');
     }
-  }
+  };
 
-  render() {
-    const { title } = this.state;
-
-    return (
-      <form className="form-container" onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          className="input-text"
-          placeholder="Add Todo..."
-          value={title}
-          onChange={this.onChange}
-        />
-        <button type="submit" className="input-submit">Submit</button>
-      </form>
-    );
-  }
-}
-
-InputTodo.propTypes = {
-  addTodoProps: PropTypes.func.isRequired,
+  return (
+    <form onSubmit={handleSubmit} className="form-container">
+      <input
+        type="text"
+        className="input-text"
+        placeholder="Add todo..."
+        value={inputText.title}
+        name="title"
+        onChange={onChange}
+      />
+      <IconContext.Provider
+        value={{
+          color: '#0bf388',
+          style: { fontSize: '20px', color: '#ff0000' },
+          className: 'submit-iconn',
+        }}
+      >
+        <button className="input-submit">
+          <IoSend
+            style={{ color: '#0bf388', fontSize: '20px', marginTop: '2px' }}
+          />
+        </button>
+      </IconContext.Provider>
+    </form>
+  );
 };
 
 export default InputTodo;
-
-/* In this InputTodo component, we are using this.onChange and this.state.title
-because the method is a part of the class */
+InputTodo.PropTypes = {
+  addTodoProps: PropTypes.func,
+};
