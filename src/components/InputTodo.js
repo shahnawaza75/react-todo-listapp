@@ -45,7 +45,7 @@ const InputTodo = (props) => {
           className: 'submit-iconn',
         }}
       >
-        <button className="input-submit">
+        <button className="input-submit" type="submit">
           <IoSend
             style={{ color: '#0bf388', fontSize: '20px', marginTop: '2px' }}
           />
@@ -54,8 +54,7 @@ const InputTodo = (props) => {
     </form>
   );
 };
-
-export default InputTodo;
-InputTodo.PropTypes = {
-  addTodoProps: PropTypes.func,
+InputTodo.propTypes = {
+  addTodoProps: PropTypes.func.isRequired,
 };
+export default InputTodo;
